@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produzione J.WOLF</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .table td, .table th {
+            text-align: center;
+        }
+        .table td.sede {
+            text-align: left;
+        }
+        .total-row {
+            font-weight: bold;
+            background-color: #f8d7da;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container">
+            <span class="navbar-brand">Produzione J.WOLF</span>
+            <a class="btn btn-danger" href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h2 class="text-center">Produzione - J.WOLF CONSULTING</h2>
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Sede</th>
+                    <th>Inseriti Oggi</th>
+                    <th>Chiusi Oggi</th>
+                    <th>Inseriti Mese</th>
+                    <th>Chiusi Mese</th>
+                    <th>Obiettivo Assegnato</th>
+                    <th>PAF</th>
+                    <th>% OBB.</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in production_summary %}
+                <tr class="{% if row.highlight %}total-row{% endif %}">
+                    <td class="sede">{{ row["Sede"] }}</td>
+                    <td>{{ row["Inseriti Oggi"] }}</td>
+                    <td>{{ row["Chiusi Oggi"] }}</td>
+                    <td>{{ row["Inseriti Mese"] }}</td>
+                    <td>{{ row["Chiusi Mese"] }}</td>
+                    <td>{{ row["Obiettivo Assegnato"] }}</td>
+                    <td>{{ row["PAF"] }}</td>
+                    <td>{{ row["% OBB."] }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3 class="text-center mt-5">Andamento Giornaliero</h3>
+        <div id="daily-chart"></div>
+    </div>
+
+    <script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const graphData = JSON.parse('{{ graph_json | safe }}');
+            Plotly.newPlot('daily-chart', graphData);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+/* Imposta il font predefinito */
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Stile delle card */
+.card {
+    border-radius: 10px;
+}
+
+/* Stile per l'intestazione della tabella */
+.table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Stile per la barra di navigazione */
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+/* Centrare il testo nelle celle della tabella */
+.table td, .table th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Allineare il testo della colonna 'Sede' a sinistra */
+.table td.sede {
+    text-align: left;
+}
+
+/* Stile per la riga totale */
+.total-row {
+    font-weight: bold;
+    background-color: #e9ecef; /* Sfondo grigio chiaro */
+    color: #000; /* Testo nero */
+    border-top: 2px solid #6c757d; /* Bordo superiore per evidenziare */
+}
+
+/* Bordo per le celle della tabella */
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}
